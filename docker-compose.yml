@@ -1,0 +1,76 @@
+services:
+
+  frontend:
+
+    build: ./frontend
+
+    container_name: employee-frontend
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - backend
+
+    networks:
+      - employee-network
+
+
+  backend:
+
+    build: ./backend
+
+    container_name: employee-backend
+
+    expose:
+      - "5000"
+
+    environment:
+
+      DB_HOST: database
+
+      DB_USER: root
+
+      DB_PASSWORD: rootpassword
+
+      DB_NAME: employee_db
+
+      DB_PORT: 3306
+
+    depends_on:
+      - database
+
+    networks:
+      - employee-network
+
+
+  database:
+
+    image: mysql:8.0
+
+    container_name: employee-database
+
+    environment:
+
+      MYSQL_ROOT_PASSWORD: rootpassword
+
+      MYSQL_DATABASE: employee_db
+
+    volumes:
+
+      - mysql-data:/var/lib/mysql
+
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+    networks:
+      - employee-network
+
+
+networks:
+
+  employee-network:
+
+
+volumes:
+
+  mysql-data:
