@@ -9,3 +9,5 @@ const API_URL = "http://BACKEND_PUBLIC_IP:5000";  - This is for aws ec2s
 to:
 
 const API_URL = "/api"; - This is docker containers
+
+.env file should be on root not inside employee-api
