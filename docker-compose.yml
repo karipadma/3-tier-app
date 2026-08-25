@@ -52,9 +52,9 @@ services:
 
     environment:
 
-      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
 
-      MYSQL_DATABASE: employee_db
+      MYSQL_DATABASE: ${DB_NAME}
 
     volumes:
 
